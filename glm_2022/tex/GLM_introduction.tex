@@ -3,14 +3,19 @@
 \usepackage[utf8]{inputenc}
 \usetheme{default}
 
+\useinnertheme{circles}
+
 %% set colours
 \definecolor{atugreen}{HTML}{005b5e}
 \setbeamercolor{title}{fg=atugreen}
 \setbeamercolor{frametitle}{fg=atugreen}
 \setbeamercolor{section in toc}{fg=atugreen}
+\setbeamercolor{itemize item}{fg=atugreen}
+\setbeamercolor{itemize subitem}{fg=orange}
 \setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+\setbeamercolor{section number projected}{bg=white,fg=atugreen}
 
-\title{Three data types: continuous, coin flips, counts}
+\title{Three data types:\\ continuous, coin flips and counts}
 \author{Cóilín Minto, Olga Lyashevska}
 \date{July 15\textsuperscript{th} 2022}
 \institute{Marine and Freshwater Research Centre\\ Atlantic Technological University \\ Galway, Ireland}
@@ -35,15 +40,46 @@
 
 \section{Data types}
 
+%%------------------
+%% CONTINUOUS DATA
+%%------------------
 \begin{frame}
- \maketitle
-\end{frame}
-
-\begin{frame}
- \frametitle{Describe these data}
+ \frametitle{Describe some features of the response data $y$}
+ \only<1>{
  \begin{center}
     \includegraphics[width=10cm]{figures/continuous_y_0.pdf}
  \end{center}
-
+} 
+ \only<2>{
+ \begin{itemize}
+  \item Response $y$ is continuous, e.g., $y = 1.25$ possible
+  \item Response can be positive or negative (on the real line)
+  \item Apparent positive linear relationship with continuous variable $x$
+  \item {\bf Example} $y$ could be a change in water height
+ \end{itemize}
+} 
 \end{frame}
+
+%% positive continuous
+\begin{frame}
+ \frametitle{Describe some features of the response data $y$}
+ \only<1>{
+ \begin{center}
+    \includegraphics[width=10cm]{figures/continuous_y_1.pdf}
+ \end{center}
+} 
+ \only<2>{
+ \begin{itemize}
+  \item Response $y$ is also continuous, e.g., $y = 0.25$ possible
+  \item Response can \underline{only} be positive (on the positive real line)
+  \item Apparent positive non-linear relationship with continuous variable $x$
+  \item {\bf Example} $y$ could be mass of individuals
+   \begin{itemize}
+    \item Discuss what values mass/weight of a fish could be
+   \end{itemize}
+ \end{itemize}
+} 
+\end{frame}
+
+
 \end{document}
