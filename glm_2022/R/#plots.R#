@@ -1,0 +1,18 @@
+##--------------------------
+## Plots for presentations
+## CM, OL: 12/7/22
+##
+##--------------------------
+
+atugreen <- "#005b5e"
+
+set.seed(101)
+n <- 20
+x <- rnorm(n, 6, 2)
+
+y <- rnorm(n, -10 + 2 * x, 1)
+
+pdf("../tex/figures/continuous_y_0.pdf", height = 6, width = 7)
+plot(x, y, pch = 19, col = atugreen, bty = "l")
+abline(h = 0, lty = 2)
+dev.off()
