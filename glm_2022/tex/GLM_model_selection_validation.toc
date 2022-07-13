@@ -1,1 +1,4 @@
-\beamer@sectionintoc {1}{Data types}{2}{0}{1}
+\beamer@sectionintoc {1}{Model Selection}{2}{0}{1}
+\beamer@sectionintoc {2}{Model Validation}{6}{0}{2}
+\beamer@sectionintoc {3}{Assumption Checking}{6}{0}{3}
+\beamer@sectionintoc {4}{Principles for improved statistical ecology}{7}{0}{4}

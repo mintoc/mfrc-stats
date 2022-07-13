@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.5.23)  12 JUL 2022 15:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.5.23)  13 JUL 2022 11:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -843,7 +843,7 @@ line 34.
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 )
-<figures/ATU-Logo-Full-RGB-Green-big.jpg, id=17, 509.15219pt x 295.1025pt>
+<figures/ATU-Logo-Full-RGB-Green-big.jpg, id=29, 509.15219pt x 295.1025pt>
 File: figures/ATU-Logo-Full-RGB-Green-big.jpg Graphic file (type jpg)
 <use figures/ATU-Logo-Full-RGB-Green-big.jpg>
 Package pdftex.def Info: figures/ATU-Logo-Full-RGB-Green-big.jpg  used on input
@@ -858,13 +858,70 @@ destination with the same identifier (name{Navigation1}) has been already used,
  duplicate ignored
 <to be read again> 
                    \relax 
-l.36 \section{Data types}
-                         pdfTeX warning (ext4): destination with the same ident
-ifier (name{page.1}) has been already used, duplicate ignored
+l.36 \section{Model Selection}
+                              pdfTeX warning (ext4): destination with the same 
+identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.36 \section{Data types}
-                          [1
+l.36 \section{Model Selection}
+                               [1
+
+] [2
+
+] [3
+
+] [4
+
+] [5
+
+]
+(./GLM_model_selection_validation.toc)pdfTeX warning (ext4): destination with t
+he same identifier (name{Navigation5}) has been already used, duplicate ignored
+
+<to be read again> 
+                   \relax 
+l.70 \section{Model Validation}
+                               pdfTeX warning (ext4): destination with the same
+ identifier (name{page.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.70 \section{Model Validation}
+                                [5
+
+] (./GLM_model_selection_validation.toc)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+pdfTeX warning (ext4): destination with the same identifier (name{Navigation5})
+ has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.74 \section{Assumption Checking}
+                                  pdfTeX warning (ext4): destination with the s
+ame identifier (name{page.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.74 \section{Assumption Checking}
+                                   [5
+
+]
+Overfull \vbox (14.12917pt too high) has occurred while \output is active []
+
+
+[6] (./GLM_model_selection_validation.toc)pdfTeX warning (ext4): destination wi
+th the same identifier (name{Navigation6}) has been already used, duplicate ign
+ored
+<to be read again> 
+                   \relax 
+l.77 ...inciples for improved statistical ecology}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{page.6}) has been already used, duplicate 
+ignored
+<to be read again> 
+                   \relax 
+l.77 ...inciples for improved statistical ecology}
+                                                   [6
+
+] [7
 
 ]
 \tf@nav=\write6
@@ -876,33 +933,34 @@ l.36 \section{Data types}
 \tf@snm=\write8
 \openout8 = `GLM_model_selection_validation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 44.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 44.
- (./GLM_model_selection_validation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 44.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 44.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 92.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 92.
+
+(./GLM_model_selection_validation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 92.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 92.
 Package rerunfilecheck Info: File `GLM_model_selection_validation.out' has not 
 changed.
-(rerunfilecheck)             Checksum: 8CD7914C1ACA22F98EF01FE43D24CF5F;45.
+(rerunfilecheck)             Checksum: ED343E0307209A517967D3F4FEDBDFD6;233.
  ) 
 Here is how much of TeX's memory you used:
- 16988 strings out of 492615
- 322983 string characters out of 6131390
- 401066 words of memory out of 5000000
- 20513 multiletter control sequences out of 15000+600000
- 10390 words of font info for 38 fonts, out of 8000000 for 9000
+ 17093 strings out of 492615
+ 325259 string characters out of 6131390
+ 402067 words of memory out of 5000000
+ 20596 multiletter control sequences out of 15000+600000
+ 10990 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,14n,55p,797b,558s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Navigation2} has been referenced but does not exi
-st, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb>
-Output written on GLM_model_selection_validation.pdf (2 pages, 253902 bytes).
+ 56i,14n,55p,797b,562s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on GLM_model_selection_validation.pdf (11 pages, 301655 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 352 PDF objects out of 1000 (max. 8388607)
+ 322 compressed objects within 4 object streams
+ 19 named destinations out of 1000 (max. 500000)
+ 80 words of extra memory for PDF output out of 10000 (max. 10000000)
 
