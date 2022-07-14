@@ -32,8 +32,10 @@ dev.off()
 set.seed(105)
 y <- rpois(n, exp(-3 + 0.5 * x))
 
+coral <- "#f88379"
+
 pdf("../tex/figures/count_y.pdf", height = 6, width = 7)
-plot(x, y, pch = 19, col = "#f88379", bty = "l")
+plot(x, y, pch = 19, col = coral, bty = "l")
 abline(h = 0, lty = 2)
 dev.off()
 
@@ -54,3 +56,36 @@ pdf("../tex/figures/normal_0.pdf", height = 6, width = 7)
 curve(dnorm(x), from = -3, to = 3, n = 1e3, bty = "l", col = atugreen, xlab = "y", ylab = "Density")
 dev.off()
 
+pdf("../tex/figures/lognormal_0.pdf", height = 6, width = 7)
+curve(dlnorm(x), from = 0, to = 5, n = 1e3, bty = "l", col = "orange2", xlab = "y", ylab = "Density")
+dev.off()
+
+
+y <- 0:10
+py <- dpois(y, lambda = 3)
+
+pdf("../tex/figures/poisson_0.pdf", height = 6, width = 7)
+plot(y, py, type = "h", col = coral, bty = "l", lwd = 2, xlab = "y", ylab = "Probability")
+dev.off()
+
+y <- 0:1
+py <- dbinom(y, 1, prob = 0.3)
+
+pdf("../tex/figures/binary_0.pdf", height = 6, width = 7)
+plot(y, py, type = "h", col = "cornflowerblue", bty = "l", lwd = 2, xlab = "y", ylab = "Probability", ylim = c(0, 1), xaxt = "n")
+axis(1, at = y)
+dev.off()
+
+
+## binomial
+y <- 0:10
+py <- dbinom(y, 10, prob = 0.3)
+
+pdf("../tex/figures/binomial_0.pdf", height = 6, width = 7)
+plot(y, py, type = "h", col = "cornflowerblue", bty = "l", lwd = 2, xlab = "y", ylab = "Probability", ylim = c(0, 0.4), xaxt = "n")
+axis(1, at = y)
+dev.off()
+
+##-----------------------
+## EXPLANATORY VARIABLES
+##-----------------------

@@ -249,6 +249,10 @@
  Note: Binomial is the sum of Bernoulli trials
 \end{frame}
 
+%%-----------------------
+%% EXPLANATORY VARIABLES
+%%-----------------------
+
 \section{Explanatory variables}
 \begin{frame}
  \frametitle{Explanatory variables\footnote{Also called ``predictors''}}
@@ -259,8 +263,53 @@
   \item<4-> Does behavioural response depend on time-of-day?
   \item<5-> \dots
  \end{itemize}
-\onslide<5>{We would like to explore/model the relationships between the response and explanatory variables}
+\onslide<5->{We would like to explore/model the relationships between the response and explanatory variables\\}
+\onslide<6>{Let's look at some \dots}
 \end{frame}
+
+\begin{frame}
+ \frametitle{How well does the model describe the response data?}
+ \begin{center}
+    \includegraphics[width=10cm]{figures/continuous_xy_0.pdf}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+ \frametitle{How well does the model describe the response data?}
+ \begin{center}
+    \includegraphics<1-1>[width=10cm]{figures/continuous_xy_0.pdf}
+    \includegraphics<2-2>[width=10cm]{figures/continuous_xy_1.pdf}
+    \includegraphics<3-3>[width=10cm]{figures/continuous_xy_2.pdf}
+    \includegraphics<4-4>[width=10cm]{figures/count_xy_0.pdf}
+    \includegraphics<5-5>[width=10cm]{figures/count_xy_1.pdf}
+    \includegraphics<6-6>[width=10cm]{figures/binary_xy_0.pdf}
+    \includegraphics<7-7>[width=10cm]{figures/binary_xy_1.pdf}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Including explanatory variables}
+ Need to explain variability in the response with explanatory variables, \underline{while respecting the distribution of the response}
+\end{frame}
+
+\section{Summary}
+\begin{frame}
+ \frametitle{Summary}
+ \begin{itemize}
+  \item<1-> Understanding the nature of the response data is key to success
+  \item<2-> There are naturally suitable distributions for many data types
+  \item<3-> Parameters of appropriate distributions can be related to explanatory variables
+  \item<4-> Need a framework to address all of these requirements - it exists and is called GLM!
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Questions? 
+\end{center}
+\end{frame}
+ 
+
 
 
 \end{document}
