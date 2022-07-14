@@ -1,0 +1,34 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[top=2cm, left=2cm, right=2cm, bottom=2cm]{geometry}
+\usepackage{times}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{longtable}
+\setitemize{itemsep=0pt, topsep=0pt}
+\newcommand{\mydash}{\hspace{0.2cm}--\hspace{0.2cm}}
+%opening
+\title{Binomial GLM worksheet}
+\author{C\'oil\'in Minto, Olga Lyashevska}
+\date{}
+\begin{document}
+
+\maketitle
+
+\noindent 
+The length, sex and maturity status of 2,899 were measured during the Irish Groundfish Survey. The data are in the file \texttt{data/haddock\_maturity.csv} \href{https://github.com/mintoc/mfrc-stats}{here}.\\ 
+
+Our main scientific question is whether the probability of being mature varies with length?
+
+\vspace{1cm}
+\begin{itemize}
+ \item[{\bf 1.}] Read the data into R.
+ \item[{\bf 2.}] Plot the data in an informative way - use colours!
+ \item[{\bf 3.}] Use the \texttt{glm} function to fit a binomial GLM to with maturity as the response and fish length as the explanatory variable - remember to supply a matrix (one column for number of successes, another for the number of failures) for the binomial GLM in R.
+ \item[{\bf 4.}] Plot the fitted values over your data plot.
+ \item[{\bf 5.}] Bonus: Include sex in the model, refit and plot.
+\end{itemize}
+
+\end{document}
