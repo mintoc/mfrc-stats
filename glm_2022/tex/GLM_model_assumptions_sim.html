@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GLM_model_assumptions_sim.knit</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Olga Lyashevska" />
+    <meta name="date" content="2022-07-14" />
+    <script src="libs, javascript/header-attrs-2.8/header-attrs.js"></script>
+    <link href="libs, javascript/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs, javascript/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs, javascript/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+# Data simulation
+
+
+- Model 1 (constant variance): 
+`$$Y= 3+5x+\epsilon, \epsilon\sim N(0, 1)$$`
+
+- Model 2 (non constant variance): 
+`$$Y= 3+5x+\epsilon, \epsilon \sim N(0, x^{2})$$`
+
+- Model 3 (non linear): 
+`$$Y= 3+5x^{2}+\epsilon, \epsilon \sim N(0, 25)$$`
+
+---
+
+# Model 1
+
+`$$Y= 3+5x+\epsilon, \epsilon \sim N(0, 1)$$`
+
+
+```r
+sim_1 = function(sample_size = 500){
+  x = runif(n = sample_size) * 5
+  y = 3 + 5 * x + rnorm(n = sample_size, mean = 0, sd = 1)
+  data.frame(x, y)
+}
+```
+
+---
+# Simulate data
+
+
+```r
+set.seed(42)
+sim_data_1 = sim_1()
+head(sim_data_1)
+```
+
+```
+#          x         y
+# 1 4.574030 24.773995
+# 2 4.685377 26.475936
+# 3 1.430698  8.954993
+# 4 4.152238 23.951210
+# 5 3.208728 20.341344
+# 6 2.595480 14.943525
+```
+---
+# Fit model
+
+
+
+```r
+plot(y ~ x, data = sim_data_1, col = "grey", pch = 20, main="Data from model 1") 
+fit_1 = lm(y ~ x, data = sim_data_1)
+abline(fit_1, col = "darkorange", lwd = 3)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+# Fitted versus Residuals Plot
+
+```r
+plot(fitted(fit_1), resid(fit_1), col = "grey", pch = 20,
+     xlab = "Fitted", ylab = "Residuals", main = "Data from Model 1")
+abline(h = 0, col = "darkorange", lwd = 2)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+# Interpertation
+We should look for two things in this plot.
+- At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. For this reason, we generally add a horizontal line at  `\(y=0\)` to emphasize this point.
+- At every fitted value, the spread of the residuals should be roughly the same. If this is the case, the constant variance assumption is valid.
+
+
+---
+# Model 2: 
+
+`$$Y= 3+5x+\epsilon, \epsilon~N(0, x^{2})$$`
+
+
+```r
+sim_2 = function(sample_size = 500) {
+  x = runif(n = sample_size) * 5
+  y = 3 + 5 * x + rnorm(n = sample_size, mean = 0, sd = x)
+  data.frame(x, y)
+}
+```
+
+---
+# Simulate data
+Model 2 an example of non-constant variance. In this case, the variance is larger for larger values of the predictor variable `\(x\)`
+
+
+```r
+set.seed(42)
+sim_data_2 = sim_2()
+fit_2 = lm(y ~ x, data = sim_data_2)
+```
+
+---
+
+
+```r
+plot(y ~ x, data = sim_data_2, col = "grey", pch = 20,
+     main = "Data from Model 2")
+abline(fit_2, col = "darkorange", lwd = 3)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+# Fitted versus Residual plot
+
+
+```r
+plot(fitted(fit_2), resid(fit_2), col = "grey", pch = 20,
+     xlab = "Fitted", ylab = "Residuals", main = "Data from Model 2")
+abline(h = 0, col = "darkorange", lwd = 2)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+# Interpretation
+
+On the fitted versus residuals plot, we see two things very clearly. 
+- For any fitted value, the residuals seem roughly centered at 0. This is good! The linearity assumption is not violated. 
+- However, we also see very clearly, that for larger fitted values, the spread of the residuals is larger. This is bad! The constant variance assumption is violated here.
+---
+# Model 3: 
+
+`$$Y= 3+5x+\epsilon, \epsilon~N(0, 25)$$`
+
+
+```r
+sim_3 = function(sample_size = 500) {
+  x = runif(n = sample_size) * 5
+  y = 3 + 5 * x ^ 2 + rnorm(n = sample_size, mean = 0, sd = 5)
+  data.frame(x, y)
+}
+```
+---
+
+# Simulate data
+
+Model 3 is an example of a model where  `\(Y\)` is not a linear combination of the predictors. In this case the predictor is  `\(x\)`, but the model uses `\(x^{2}\)`.
+
+
+```r
+set.seed(42)
+sim_data_3 = sim_3()
+fit_3 = lm(y ~ x, data = sim_data_3)
+```
+---
+
+
+```r
+plot(y ~ x, data = sim_data_3, col = "grey", pch = 20,
+     main = "Data from Model 3")
+abline(fit_3, col = "darkorange", lwd = 3)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+# Fitted versus residual plot
+
+
+```r
+plot(fitted(fit_3), resid(fit_3), col = "grey", pch = 20,
+     xlab = "Fitted", ylab = "Residuals", main = "Data from Model 3")
+abline(h = 0, col = "darkorange", lwd = 2)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+---
+# Interpretation
+This time on the fitted versus residuals plot, for any fitted value, the spread of the residuals is about the same. 
+
+However, they are not even close to centered at zero! At small and large fitted values the model is underestimating, while at medium fitted values, the model is overestimating. These are systematic errors, not random noise. 
+
+So the constant variance assumption is met, but the linearity assumption is violated. The form of our model is simply wrong. We’re trying to fit a line to a curve!
+---
+# Test for heteroscedasticity
+
+*Breusch-Pagan Test*
+
+- `\(H_{0}:\)` Homoscedasticity. The errors have constant variance about the true model.
+- `\(H_{1}:\)` Heteroscedasticity. The errors have non-constant variance about the true model.
+
+This test will specifically test the constant variance assumption.
+
+Classical tests of constant variance are sensitive to nonnormality!
+
+---
+
+
+```r
+#install.packages("lmtest")
+library(lmtest)
+```
+Let’s try it on the three models we fit above. Recall,
+
+- `fit_1` had no violation of assumptions,
+- `fit_2` violated the constant variance assumption, but not linearity,
+- `fit_3` violated linearity, but not constant variance.
+---
+
+```r
+bptest(fit_1)
+```
+
+```
+## 
+## 	studentized Breusch-Pagan test
+## 
+## data:  fit_1
+## BP = 1.0234, df = 1, p-value = 0.3117
+```
+For `fit_1` we see a large p-value, so we do not reject the null of homoscedasticity, which is what we would expect.
+
+---
+
+```r
+bptest(fit_2)
+```
+
+```
+## 
+## 	studentized Breusch-Pagan test
+## 
+## data:  fit_2
+## BP = 76.693, df = 1, p-value &lt; 2.2e-16
+```
+For `fit_2` we see a small p-value, so we reject the null of homoscedasticity. The constant variance assumption is violated. This matches our findings with a fitted versus residuals plot.
+
+---
+
+
+```r
+bptest(fit_3)
+```
+
+```
+## 
+## 	studentized Breusch-Pagan test
+## 
+## data:  fit_3
+## BP = 0.33466, df = 1, p-value = 0.5629
+```
+
+Lastly, for `fit_3` we again see a large p-value, so we do not reject the null of homoscedasticity, which matches our findings with a fitted versus residuals plot.
+---
+# Histograms
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+- For `fit_1` histogram appears very normal. 
+- For `fit_3`, appears to be very non-normal. 
+- However `fit_2` is not as clear. It does have a rough bell shape, however, it also has a very sharp peak. For this reason we will usually use more powerful tools such as Q-Q plots and the Shapiro-Wilk test for assessing the normality of errors.
+---
+# Q-Q plot
+
+Q-Q plot for the residuals of `fit_1` to check if the errors could truly be normally distributed.
+
+
+```r
+qqnorm(resid(fit_1), main = "Normal Q-Q Plot, fit_1", col = "darkgrey")
+qqline(resid(fit_1), col = "dodgerblue", lwd = 2)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+---
+
+For `fit_2`, we have a suspect Q-Q plot. We would probably not believe the errors follow a normal distribution.
+
+
+```r
+qqnorm(resid(fit_2), main = "Normal Q-Q Plot, fit_2", col = "darkgrey")
+qqline(resid(fit_2), col = "dodgerblue", lwd = 2)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+For `fit_3`, again we have a suspect Q-Q plot. We would probably not believe the errors follow a normal distribution.
+
+
+```r
+qqnorm(resid(fit_3), main = "Normal Q-Q Plot, fit_3", col = "darkgrey")
+qqline(resid(fit_3), col = "dodgerblue", lwd = 2)
+```
+
+![](GLM_model_assumptions_sim_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+:w
+
+
+---
+# Test for normality
+
+*Shapiro-Wilk Test*
+
+The null hypothesis assumes the data were sampled from a normal distribution, thus a small p-value indicates we believe there is only a small probability the data could have been sampled from a normal distribution.
+
+- `\(H_{0}:\)` data is normally distributed
+- `\(H_{1}:\)` data is not normally distributed
+
+---
+
+
+```r
+shapiro.test(resid(fit_1))
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  resid(fit_1)
+## W = 0.99858, p-value = 0.9622
+```
+We see a large p-value (&gt;0.05), so we accept the null of normality, and conclude that data is normal. 
+
+---
+
+```r
+shapiro.test(resid(fit_2))
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  resid(fit_2)
+## W = 0.93697, p-value = 1.056e-13
+```
+We see a small p-value (&lt;0.05), so we reject the null of normality, and conclude that data is not normal. 
+
+---
+
+
+```r
+shapiro.test(resid(fit_3))
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  resid(fit_3)
+## W = 0.97643, p-value = 3.231e-07
+```
+We see a small p-value (&lt;0.05), so we reject the null of normality, and conclude that data is not normal. 
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

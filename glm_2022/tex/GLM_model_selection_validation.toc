@@ -1,3 +1,0 @@
-\beamer@sectionintoc {1}{Model Selection}{2}{0}{1}
-\beamer@sectionintoc {2}{Model Validation}{13}{0}{2}
-\beamer@sectionintoc {3}{Principles for improved statistical ecology}{28}{0}{3}
