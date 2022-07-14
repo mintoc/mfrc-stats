@@ -1,0 +1,294 @@
+---
+title: ""
+subtitle: "Checking model assumptions"
+author: "Olga Lyashevska"
+institute: ""
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs, javascript
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+# Data simulation
+
+
+- Model 1 (constant variance): 
+$$Y= 3+5x+\epsilon, \epsilon\sim N(0, 1)$$
+
+- Model 2 (non constant variance): 
+$$Y= 3+5x+\epsilon, \epsilon \sim N(0, x^{2})$$
+
+- Model 3 (non linear): 
+$$Y= 3+5x^{2}+\epsilon, \epsilon \sim N(0, 25)$$
+
+---
+
+# Model 1
+
+$$Y= 3+5x+\epsilon, \epsilon \sim N(0, 1)$$
+
+```{r comment="#"}
+sim_1 = function(sample_size = 500){
+  x = runif(n = sample_size) * 5
+  y = 3 + 5 * x + rnorm(n = sample_size, mean = 0, sd = 1)
+  data.frame(x, y)
+}
+```
+
+---
+# Simulate data
+
+```{r comment="#"}
+set.seed(42)
+sim_data_1 = sim_1()
+head(sim_data_1)
+```
+---
+# Fit model
+
+
+```{r fig.width=10, fig.height=5}
+plot(y ~ x, data = sim_data_1, col = "grey", pch = 20, main="Data from model 1") 
+fit_1 = lm(y ~ x, data = sim_data_1)
+abline(fit_1, col = "darkorange", lwd = 3)
+```
+
+---
+# Fitted versus Residuals Plot
+```{r fig.width=10, fig.height=5}
+plot(fitted(fit_1), resid(fit_1), col = "grey", pch = 20,
+     xlab = "Fitted", ylab = "Residuals", main = "Data from Model 1")
+abline(h = 0, col = "darkorange", lwd = 2)
+```
+
+---
+# Interpertation
+We should look for two things in this plot.
+- At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. For this reason, we generally add a horizontal line at  $y=0$ to emphasize this point.
+- At every fitted value, the spread of the residuals should be roughly the same. If this is the case, the constant variance assumption is valid.
+
+
+---
+# Model 2: 
+
+$$Y= 3+5x+\epsilon, \epsilon~N(0, x^{2})$$
+
+```{r comment="#"}
+sim_2 = function(sample_size = 500) {
+  x = runif(n = sample_size) * 5
+  y = 3 + 5 * x + rnorm(n = sample_size, mean = 0, sd = x)
+  data.frame(x, y)
+}
+```
+
+---
+# Simulate data
+Model 2 an example of non-constant variance. In this case, the variance is larger for larger values of the predictor variable $x$
+
+```{r comment="#"}
+set.seed(42)
+sim_data_2 = sim_2()
+fit_2 = lm(y ~ x, data = sim_data_2)
+```
+
+---
+
+```{r fig.width=10, fig.height=5}
+plot(y ~ x, data = sim_data_2, col = "grey", pch = 20,
+     main = "Data from Model 2")
+abline(fit_2, col = "darkorange", lwd = 3)
+```  
+
+---
+# Fitted versus Residual plot
+
+```{r fig.width=10, fig.height=5}
+plot(fitted(fit_2), resid(fit_2), col = "grey", pch = 20,
+     xlab = "Fitted", ylab = "Residuals", main = "Data from Model 2")
+abline(h = 0, col = "darkorange", lwd = 2)
+```
+
+---
+# Interpretation
+
+On the fitted versus residuals plot, we see two things very clearly. 
+- For any fitted value, the residuals seem roughly centered at 0. This is good! The linearity assumption is not violated. 
+- However, we also see very clearly, that for larger fitted values, the spread of the residuals is larger. This is bad! The constant variance assumption is violated here.
+---
+# Model 3: 
+
+$$Y= 3+5x+\epsilon, \epsilon~N(0, 25)$$
+
+```{r comment="#"}
+sim_3 = function(sample_size = 500) {
+  x = runif(n = sample_size) * 5
+  y = 3 + 5 * x ^ 2 + rnorm(n = sample_size, mean = 0, sd = 5)
+  data.frame(x, y)
+}
+```
+---
+
+# Simulate data
+
+Model 3 is an example of a model where  $Y$ is not a linear combination of the predictors. In this case the predictor is  $x$, but the model uses $x^{2}$.
+
+```{r}
+set.seed(42)
+sim_data_3 = sim_3()
+fit_3 = lm(y ~ x, data = sim_data_3)
+```
+---
+
+```{r fig.width=10, fig.height=5}
+plot(y ~ x, data = sim_data_3, col = "grey", pch = 20,
+     main = "Data from Model 3")
+abline(fit_3, col = "darkorange", lwd = 3)
+```
+
+---
+# Fitted versus residual plot
+
+```{r fig.width=10, fig.height=5}
+plot(fitted(fit_3), resid(fit_3), col = "grey", pch = 20,
+     xlab = "Fitted", ylab = "Residuals", main = "Data from Model 3")
+abline(h = 0, col = "darkorange", lwd = 2)
+```
+---
+# Interpretation
+This time on the fitted versus residuals plot, for any fitted value, the spread of the residuals is about the same. 
+
+However, they are not even close to centered at zero! At small and large fitted values the model is underestimating, while at medium fitted values, the model is overestimating. These are systematic errors, not random noise. 
+
+So the constant variance assumption is met, but the linearity assumption is violated. The form of our model is simply wrong. We’re trying to fit a line to a curve!
+---
+# Test for heteroscedasticity
+
+*Breusch-Pagan Test*
+
+- $H_{0}:$ Homoscedasticity. The errors have constant variance about the true model.
+- $H_{1}:$ Heteroscedasticity. The errors have non-constant variance about the true model.
+
+This test will specifically test the constant variance assumption.
+
+Classical tests of constant variance are sensitive to nonnormality!
+
+---
+
+```{r message=FALSE}
+#install.packages("lmtest")
+library(lmtest)
+```
+Let’s try it on the three models we fit above. Recall,
+
+- `fit_1` had no violation of assumptions,
+- `fit_2` violated the constant variance assumption, but not linearity,
+- `fit_3` violated linearity, but not constant variance.
+---
+```{r}
+bptest(fit_1)
+```
+For `fit_1` we see a large p-value, so we do not reject the null of homoscedasticity, which is what we would expect.
+
+---
+```{r}
+bptest(fit_2)
+```
+For `fit_2` we see a small p-value, so we reject the null of homoscedasticity. The constant variance assumption is violated. This matches our findings with a fitted versus residuals plot.
+
+---
+
+```{r}
+bptest(fit_3)
+```
+
+Lastly, for `fit_3` we again see a large p-value, so we do not reject the null of homoscedasticity, which matches our findings with a fitted versus residuals plot.
+---
+# Histograms
+
+```{r echo=FALSE, fig.width=15, fig.height=5}
+par(mfrow = c(1, 3))
+hist(resid(fit_1),
+     xlab   = "Residuals",
+     main   = "Histogram of Residuals, fit_1",
+     col    = "darkorange",
+     border = "dodgerblue",
+     breaks = 20)
+hist(resid(fit_2),
+     xlab   = "Residuals",
+     main   = "Histogram of Residuals, fit_2",
+     col    = "darkorange",
+     border = "dodgerblue",
+     breaks = 20)
+hist(resid(fit_3),
+     xlab   = "Residuals",
+     main   = "Histogram of Residuals, fit_3",
+     col    = "darkorange",
+     border = "dodgerblue",
+     breaks = 20)
+```
+- For `fit_1` histogram appears very normal. 
+- For `fit_3`, appears to be very non-normal. 
+- However `fit_2` is not as clear. It does have a rough bell shape, however, it also has a very sharp peak. For this reason we will usually use more powerful tools such as Q-Q plots and the Shapiro-Wilk test for assessing the normality of errors.
+---
+# Q-Q plot
+
+Q-Q plot for the residuals of `fit_1` to check if the errors could truly be normally distributed.
+
+```{r fig.width=10, fig.height=5}
+qqnorm(resid(fit_1), main = "Normal Q-Q Plot, fit_1", col = "darkgrey")
+qqline(resid(fit_1), col = "dodgerblue", lwd = 2)
+```
+---
+
+For `fit_2`, we have a suspect Q-Q plot. We would probably not believe the errors follow a normal distribution.
+
+```{r fig.width=10, fig.height=5}
+qqnorm(resid(fit_2), main = "Normal Q-Q Plot, fit_2", col = "darkgrey")
+qqline(resid(fit_2), col = "dodgerblue", lwd = 2)
+```
+
+---
+For `fit_3`, again we have a suspect Q-Q plot. We would probably not believe the errors follow a normal distribution.
+
+```{r fig.width=10, fig.height=5}
+qqnorm(resid(fit_3), main = "Normal Q-Q Plot, fit_3", col = "darkgrey")
+qqline(resid(fit_3), col = "dodgerblue", lwd = 2)
+```
+:w
+
+
+---
+# Test for normality
+
+*Shapiro-Wilk Test*
+
+The null hypothesis assumes the data were sampled from a normal distribution, thus a small p-value indicates we believe there is only a small probability the data could have been sampled from a normal distribution.
+
+- $H_{0}:$ data is normally distributed
+- $H_{1}:$ data is not normally distributed
+
+---
+
+```{r}
+shapiro.test(resid(fit_1))
+```
+We see a large p-value (>0.05), so we accept the null of normality, and conclude that data is normal. 
+
+---
+```{r}
+shapiro.test(resid(fit_2))
+```
+We see a small p-value (<0.05), so we reject the null of normality, and conclude that data is not normal. 
+
+---
+
+```{r}
+shapiro.test(resid(fit_3))
+```
+We see a small p-value (<0.05), so we reject the null of normality, and conclude that data is not normal. 
+
