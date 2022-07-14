@@ -17,3 +17,5 @@
 *.blg
 *.bbl
 /glm_2022/R/make_haddock_data.R
+*~
+\#*\#
