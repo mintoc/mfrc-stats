@@ -1,0 +1,23 @@
+\frametitle{Stepwise selection}
+\begin{itemize}
+\item We can look at AICs:
+\begin{lstlisting}
+AIC(mod1)
+\end{lstlisting}
+Lower AIC values gives better model.
+
+\item Or through \textit{MASS::stepAIC}
+\begin{lstlisting}
+MASS::stepAIC(mod2, trace = FALSE)
+\end{lstlisting}
+
+\item Compare 2 nested models
+\begin{lstlisting}
+anova(mod1, mod2)
+\end{lstlisting}
+
+\item Dredge
+\begin{lstlisting}
+
+\end{lstlisting}
+\end{itemize}
