@@ -15,7 +15,7 @@
 \setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
 \setbeamercolor{section number projected}{bg=white,fg=atugreen}
 
-\title{Three data types:\\ continuous, coin flips and counts}
+\title{Three data types:\\ continuous, counts and coin flips}
 \author{Cóilín Minto, Olga Lyashevska}
 \date{July 15\textsuperscript{th} 2022}
 \institute{Marine and Freshwater Research Centre\\ Atlantic Technological University \\ Galway, Ireland}
@@ -224,6 +224,7 @@
   \item<only@2> Distribution over 0 or 1 (or other binary categories) only
   \item Governed by parameter: probability of success $p$ (e.g., probability of being mature)
   \item Think: coin flip but coin not necessarily fair
+  \item Write $y \sim \textnormal{Bernoulli}(p)$
  \end{itemize}
 \end{frame}
 
@@ -243,8 +244,24 @@
 \begin{itemize}
   \item<only@2> Distribution over $\{0, 1, \dots,n\}$ only
   \item Governed by 2 parameters: number of trials $n$ (think: number coin flips) and probability of success $p$ on any trial
+  \item Write $y \sim \textnormal{Bin}(n,p)$
  \end{itemize}
+ Note: Binomial is the sum of Bernoulli trials
 \end{frame}
+
+\section{Explanatory variables}
+\begin{frame}
+ \frametitle{Explanatory variables\footnote{Also called ``predictors''}}
+ Often a goal of an experiment or observational study is to relate observed response values to explanatory variables, e.g.,
+ \begin{itemize}
+  \item<2-> Does mass depend on length and is this the same across areas?
+  \item<3-> Does abundance relate to environment, e.g., temperature?
+  \item<4-> Does behavioural response depend on time-of-day?
+  \item<5-> \dots
+ \end{itemize}
+\onslide<5>{We would like to explore/model the relationships between the response and explanatory variables}
+\end{frame}
+
 
 \end{document}
 
