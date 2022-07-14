@@ -1,0 +1,9 @@
+\frametitle{Link function: binomial}
+The default link function relating the mean and the linear predictor for Binomial is the logit
+\begin{equation*}
+ \textrm{logit}(p)=\eta
+\end{equation*}
+where $\eta$ is the linear predictor (where your covariates enter)\\
+\begin{equation*}
+\textrm{logit}(p)=\ln\left(\frac{p}{1-p}\right)
+\end{equation*}
