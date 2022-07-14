@@ -99,7 +99,7 @@
   \item Response $y$ is a count (discrete), e.g., $y = 1.25$ impossible
   \item Response can be zero or a positive integer
   \item Apparent positive non-linear relationship with continuous variable $x$
-  \item {\bf Example} $y$ could be abundance
+  \item {\bf Example} $y$ could be an organism count per unit area (abundance)
    \begin{itemize}
     \item Discuss what values of abundance are possible
    \end{itemize}  
@@ -120,10 +120,10 @@
  \only<2>{
   \textcolor{CornflowerBlue}{{\bf Binary data}}\vspace{.5cm}
  \begin{itemize}
-  \item Response $y$ can be either a 1 or a 0 (or other binary categories) 
+  \item Response $y$ can be either a 1 or a 0 (or other binary categories, e.g., on/off) 
    \begin{itemize}
     \item Often it is a sum of positives out of a given number of trials, e.g., total number of heads in 10 coin flips
-    \item Key thing is that for any one flip there can only be 2 outcomes
+    \item Key thing is that for any one flip there can only be 2 outcomes   
    \end{itemize}  
   \item Apparent positive non-linear relationship with continuous variable $x$
   \item {\bf Example} $y$ could be maturity status (mature/immature) for an organism
@@ -145,13 +145,105 @@
 
 \begin{frame}
  \frametitle{Continuous probability distributions}
+ \begin{center}
+ \textcolor{atugreen}{Normal distribution}
+ \end{center}
  \only<1>{
 % \vspace{-1cm}
  \begin{center}
-  \textcolor{atugreen}{Normal distribution}
     \includegraphics[width=9cm]{figures/normal_0.pdf}
  \end{center}
 }
+
+ \begin{itemize}
+  \item<only@2> Distribution is continuous, e.g., $y = 1.25$ possible
+  \item Positive or negative values possible (on the real line)
+  \item Governed by two parameters: mean $\mu$ and variance $\sigma^2$
+  \item Write: $y \sim \textnormal{N}(\mu, \sigma^2)$
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Positive continuous probability distributions}
+ \begin{center}
+ \textcolor{Orange}{Lognormal distribution}
+ \end{center}
+ \only<1>{
+% \vspace{-1cm}
+ \begin{center}
+    \includegraphics[width=9cm]{figures/lognormal_0.pdf}
+ \end{center}
+}
+
+ \begin{itemize}
+  \item<only@2> Distribution is continuous, e.g., $y = 1.25$ possible
+  \item Only positive values possible (on the positive real line)
+  \item Governed by two parameters: mean $\mu$ and standard deviation $\sigma$ (both on log scale)
+  \item Write: $y \sim \textnormal{Lognormal}(\mu, \sigma)$
+ \end{itemize}
+\end{frame}
+
+%% Poisson
+\begin{frame}
+ \frametitle{Count probability distributions}
+ \begin{center}
+ \textcolor{Salmon}{Poisson distribution}
+ \end{center}
+ \only<1>{
+% \vspace{-1cm}
+ \begin{center}
+    \includegraphics[width=9cm]{figures/poisson_0.pdf}
+ \end{center}
+}
+
+ \begin{itemize}
+  \item<only@2> Distribution is discrete, e.g., $y = 1.25$ impossible
+  \item Distribution is only positive at zero and positive integers
+  \item Governed by one parameter: rate $\lambda$ (e.g., density)
+  \begin{itemize}
+  \item Discuss rates in relation to counts
+  \end{itemize}
+  \item Write: $y \sim \textnormal{Pois}(\lambda)$
+ \end{itemize}
+\end{frame}
+
+%% Binary
+\begin{frame}
+ \frametitle{Binary probability distribution}
+ \begin{center}
+ \textcolor{CornflowerBlue}{Binary (Bernoulli) distribution}
+ \end{center}
+ \only<1>{
+% \vspace{-1cm}
+ \begin{center}
+    \includegraphics[width=9cm]{figures/binary_0.pdf}
+ \end{center}
+}
+
+\begin{itemize}
+  \item<only@2> Distribution over 0 or 1 (or other binary categories) only
+  \item Governed by parameter: probability of success $p$ (e.g., probability of being mature)
+  \item Think: coin flip but coin not necessarily fair
+ \end{itemize}
+\end{frame}
+
+%% Binomial
+\begin{frame}
+ \frametitle{Binomial probability distribution}
+ \begin{center}
+ \textcolor{CornflowerBlue}{Binomial distribution}
+ \end{center}
+ \only<1>{
+% \vspace{-1cm}
+ \begin{center}
+    \includegraphics[width=9cm]{figures/binomial_0.pdf}
+ \end{center}
+}
+
+\begin{itemize}
+  \item<only@2> Distribution over $\{0, 1, \dots,n\}$ only
+  \item Governed by 2 parameters: number of trials $n$ (think: number coin flips) and probability of success $p$ on any trial
+ \end{itemize}
 \end{frame}
 
 \end{document}
