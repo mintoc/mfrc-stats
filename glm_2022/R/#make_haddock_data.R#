@@ -1,0 +1,23 @@
+igfs.dat <- read.csv("/home/coilin/Dropbox/docs/analyses/lhmix/matmix/R/Q1_survey_maturity_data.csv", stringsAsFactors = FALSE)
+
+## need to sort out length bins to represent mid of length class
+names(igfs.dat)[names(igfs.dat) == "fldFishLength"] <- "length"
+names(igfs.dat)[names(igfs.dat) == "fldFishSex"] <- "obs.sex"
+names(igfs.dat)[names(igfs.dat) == "fldMainSpeciesCode"] <- "species"
+
+igfs.dat$length <- igfs.dat$length / 10 ## cm, prob need to centre also
+igfs.dat$maturity <- ifelse(igfs.dat$fldFishMaturity > 2, "mature", "immature")
+igfs.dat$survey <- "IGFS"
+
+had_dat <- subset(igfs.dat, species == "HAD")
+
+library(reshape)
+
+tmp <- cast(length + obs.sex ~ maturity , data = had_dat)
+
+had <- subset(tmp, obs.sex != "U")
+
+names(had)[names(had) == "obs.sex"] <- "sex"
+
+write.csv(had, file = "../data/haddock_maturity.csv", row.names = FALSE)
+
