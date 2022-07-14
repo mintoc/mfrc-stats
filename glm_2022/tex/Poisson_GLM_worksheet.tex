@@ -1,0 +1,38 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[top=2cm, left=2cm, right=2cm, bottom=2cm]{geometry}
+\usepackage{times}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{longtable}
+\setitemize{itemsep=0pt, topsep=0pt}
+\newcommand{\mydash}{\hspace{0.2cm}--\hspace{0.2cm}}
+%opening
+\title{Poisson GLM worksheet}
+\author{C\'oil\'in Minto, Olga Lyashevska}
+\date{}
+\begin{document}
+
+\maketitle
+\noindent Jellyfish populations are an important contemporary topic in ocean sciences. To study the effect of temperature on jellyfish abundance, a researcher looked at the number of \emph{Aurelia spp.} per square kilometre in the Northeast and Northwest Atlantic over the course of a season. The temperature of each observation was also recorded. The researcher is interested in the effects of are and temperature on jellyfish abundance.\\
+The file \texttt{jellyfish.txt} is \href{https://github.com/mintoc/mfrc-stats/tree/main/glm_2022/data}{here}.
+\vspace{1cm}
+\begin{itemize}
+ \item[{\bf 1.}] Read the data into R.
+ \item[{\bf 2.}] Plot the data in a way you think suitable.
+ \item[{\bf 3.}] Use the \texttt{glm} function in R to fit Poisson regressions (log-linear models) with:
+\begin{itemize}
+\item[a.] Just a grand mean
+\item[b.] A grand mean plus a grand effect of temperature
+\item[c.] By-area mean
+\item[d.] By-area mean plus a grand effect of temperature
+\item[e.] By-area mean plus by-area effect of temperature
+\end{itemize}
+ \item[{\bf 5.}] Can you interpret what the parameters mean?
+ \item[{\bf 6.}] Overlay your plot with predictions from one of the models
+ \item[{\bf 7.}] Bonus: add 95\% confidence intervals to your lines
+\end{itemize}
+
+\end{document}
