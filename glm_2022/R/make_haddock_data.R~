@@ -10,14 +10,3 @@ igfs.dat$maturity <- ifelse(igfs.dat$fldFishMaturity > 2, "mature", "immature")
 igfs.dat$survey <- "IGFS"
 
 had_dat <- subset(igfs.dat, species == "HAD")
-
-library(reshape)
-
-tmp <- cast(length + obs.sex ~ maturity , data = had_dat)
-
-had <- subset(tmp, obs.sex != "U")
-
-names(had)[names(had) == "obs.sex"] <- "sex"
-
-write.csv(had, file = "../data/haddock_maturity.csv", row.names = FALSE)
-
