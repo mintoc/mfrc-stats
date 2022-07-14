@@ -14,3 +14,5 @@
 *.nav
 *.snm
 *.gz
+*.blg
+*.bbl
